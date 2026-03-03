@@ -1,5 +1,4 @@
 package com.example.FoodDelivery.Entities;
-
 public class Order {
     String orderId;
     Customer cust;
