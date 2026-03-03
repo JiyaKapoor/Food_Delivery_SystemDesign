@@ -1,5 +1,4 @@
 package com.example.FoodDelivery.Entities;
-
 public class MenuItem {
     Restaurant rest;
     String name;
