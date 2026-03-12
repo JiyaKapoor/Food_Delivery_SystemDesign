@@ -9,9 +9,12 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="custId")
     Customer cust;
-
+    @ManyToOne
+    @JoinColumn(name="restId")
     Restaurant rest;
     OrderStatus orderstatus = OrderStatus.PREPARING;
+    @OneToOne
+    @JoinColumn(name="agentId")
     DeliveryAgent agent;
     double price;
 

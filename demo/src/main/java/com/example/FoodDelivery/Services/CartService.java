@@ -1,43 +1,47 @@
 package com.example.FoodDelivery.Services;
 import com.example.FoodDelivery.Entities.*;
+import com.example.FoodDelivery.Repository.CartRepo;
+import com.example.FoodDelivery.Repository.OrderRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.*;
+@Service
 public class CartService {
     DeliveryAgentService deliveryAgentService;
     public CartService(DeliveryAgentService deliveryAgentService){
         this.deliveryAgentService=deliveryAgentService;
     }
+    @Autowired
+    private CartRepo cartRepo;
+    @Autowired
+    private OrderRepo orderRepo;
     //this service class allows users to modify their cart
-    HashMap<Customer,HashMap<Restaurant,Cart>> customerCarts=new HashMap<>();
+
     public void addToCart(Customer cust,MenuItem item,int qty){
-        //teh design allows users to maintain seperate carts for different restaurants
-        if(!customerCarts.containsKey(cust)){
-            HashMap<Restaurant,Cart> restCart=new HashMap<>();
+        //the design allows users to maintain separate carts for different restaurants
+        boolean cartExists=cartRepo.existsByCustomerAndRestaurant(cust,item.getRestaurant());
+        if(!cartExists){
             Cart cart=new Cart(item.getRestaurant(),cust);
             cart.addItemToCart(item,qty);
-            restCart.put(item.getRestaurant(),cart);
-            customerCarts.put(cust,restCart);
+            cartRepo.save(cart);
+
         }
         else{
-            //we need to check if there is already a cart for thsi restaurant present
-            HashMap<Restaurant,Cart> restCart=customerCarts.get(cust);
-            if(restCart.containsKey(item.getRestaurant())){
-                restCart.get(item.getRestaurant()).addItemToCart(item,qty);
-            }
-            else{
-                Cart newCart=new Cart(item.getRestaurant(),cust);
-                newCart.addItemToCart(item,qty);
-                restCart.put(item.getRestaurant(),newCart);
-            }
+            Cart existingCart=cartRepo.findByCustomerAndRestaurant(cust,item.getRestaurant()).orElseThrow(() -> new RuntimeException("Cart not found"));
+            existingCart.addItemToCart(item,qty);
+            cartRepo.save(existingCart);
         }
     }
     public Order placeOrder(Customer customer,Restaurant restaurant){
         // we need to finalise the cart which we will be getting from the hashmap
-        Cart customerCart=customerCarts.get(customer).get(restaurant);
+        Cart customerCart=cartRepo.findByCustomerAndRestaurant(customer,restaurant).orElseThrow(() -> new RuntimeException("Cart not found"));
         double price=customerCart.computePrice();
         //next up we are required to assign a delivery partner
         DeliveryAgent agent=deliveryAgentService.bestPartner(restaurant.getLoc());
         agent.toggleAval(false);
         Order order=new Order(customer,restaurant,price,agent);
+        orderRepo.save(order);
         return order;
     }
 }
