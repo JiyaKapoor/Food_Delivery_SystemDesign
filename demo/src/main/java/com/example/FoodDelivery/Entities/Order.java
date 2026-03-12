@@ -1,29 +1,41 @@
 package com.example.FoodDelivery.Entities;
 
+import jakarta.persistence.*;
+
 public class Order {
-    String orderId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long orderId;
+    @ManyToOne
+    @JoinColumn(name="custId")
     Customer cust;
+
     Restaurant rest;
-    OrderStatus orderstatus=OrderStatus.PREPARING;
+    OrderStatus orderstatus = OrderStatus.PREPARING;
     DeliveryAgent agent;
     double price;
-    public Order(Customer cust,Restaurant rest,double price,DeliveryAgent agent){
-        this.cust=cust;
-        this.rest=rest;
-        this.price=price;
-        this.agent=agent;
+
+    public Order(Customer cust, Restaurant rest, double price, DeliveryAgent agent) {
+        this.cust = cust;
+        this.rest = rest;
+        this.price = price;
+        this.agent = agent;
     }
+
     //a method to change the order status
-    public void updateStatus(OrderStatus status){
-        this.orderstatus=status;
+    public void updateStatus(OrderStatus status) {
+        this.orderstatus = status;
     }
-    public OrderStatus getOrderStatus(){
+
+    public OrderStatus getOrderStatus() {
         return this.orderstatus;
     }
-    public double getPrice(){
+
+    public double getPrice() {
         return this.price;
     }
-    public Customer getCust(){
+
+    public Customer getCust() {
         return this.cust;
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 public class RestaurantService {
     HashMap<String, Restaurant> map=new HashMap<>();
     public void registerRest(String id, String name,Location loc){
-        Restaurant rest=new Restaurant(id,name,loc);
+        Restaurant rest=new Restaurant(name,loc);
         map.put(id,rest);
     }
     //user should be able to browse restaurants and their menus

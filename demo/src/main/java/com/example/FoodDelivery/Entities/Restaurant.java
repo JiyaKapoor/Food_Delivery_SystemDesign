@@ -1,26 +1,40 @@
 package com.example.FoodDelivery.Entities;
 
-import java.util.List;
+import jakarta.persistence.*;
 
+import java.util.List;
+@Entity
+@Table(name="restaurants")
 public class Restaurant {
-    String restId;
-    String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long restId;
+    private String name;
+    @OneToMany(mappedBy = "rest", cascade = CascadeType.ALL)
     List<MenuItem> menu;
+    @Embedded
     Location loc;
-    public Restaurant(String restId,String name,Location loc){
-        this.restId=restId;
-        this.name=name;
-        this.loc=loc;
+    public Restaurant() {
+
     }
-    public List<MenuItem> getMenu(){
+
+    public Restaurant(String name, Location loc) {
+        this.name = name;
+        this.loc = loc;
+    }
+
+    public List<MenuItem> getMenu() {
         return this.menu;
     }
-    public String getRestId(){
+
+    public long getRestId() {
         return this.restId;
     }
-    public Location getLoc(){
+
+    public Location getLoc() {
         return this.loc;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
