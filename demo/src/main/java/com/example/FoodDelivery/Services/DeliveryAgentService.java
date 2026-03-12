@@ -4,7 +4,6 @@ import com.example.FoodDelivery.Entities.*;
 import com.example.FoodDelivery.Repository.AgentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 @Service
 public class DeliveryAgentService {
     @Autowired

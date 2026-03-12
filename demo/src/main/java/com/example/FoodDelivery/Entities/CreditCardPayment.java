@@ -1,5 +1,4 @@
 package com.example.FoodDelivery.Entities;
-
 public class CreditCardPayment extends Payment{
     private String cardNumber;
     private String CVV;
