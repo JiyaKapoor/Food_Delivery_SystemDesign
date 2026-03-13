@@ -1,15 +1,14 @@
 package com.example.FoodDelivery.DTO;
 
-import com.example.FoodDelivery.Entities.Customer;
-import com.example.FoodDelivery.Entities.Restaurant;
-
 public class OrderReq {
-    private Customer cust;
-    private Restaurant rest;
-    public Customer getCust(){
-        return this.cust;
+    private Long custId;
+    private Long restId;
+    public Long getCustId(){
+        return this.custId;
     }
-    public Restaurant getRest(){
-        return this.rest;
+    public Long getRestId(){
+        return this.restId;
     }
+
+
 }

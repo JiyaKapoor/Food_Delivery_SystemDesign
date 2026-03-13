@@ -8,6 +8,7 @@ import com.example.FoodDelivery.Entities.Order;
 import com.example.FoodDelivery.Entities.Restaurant;
 import com.example.FoodDelivery.Repository.CustomerRepo;
 import com.example.FoodDelivery.Repository.MenuItemRepo;
+import com.example.FoodDelivery.Repository.RestaurantRepo;
 import com.example.FoodDelivery.Services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,8 @@ public class CartController {
     private CustomerRepo customerRepo;
     @Autowired
     private MenuItemRepo menuItemRepo;
+    @Autowired
+    private RestaurantRepo restaurantRepo;
     @PostMapping("/add")
     public void addToCart(@RequestBody CartReq request){
         Customer cust=customerRepo.getById(request.getCustId());
@@ -34,9 +37,8 @@ public class CartController {
     //finalising the cart to place order
     @PostMapping("/placeOrder")
     public Order placeOrder(@RequestBody OrderReq req){
-        Customer cust=req.getCust();
-        Restaurant rest=req.getRest();
+        Customer cust=customerRepo.getById(req.getCustId());
+        Restaurant rest=restaurantRepo.getById(req.getRestId());
         return cartService.placeOrder(cust,rest);
     }
-
 }

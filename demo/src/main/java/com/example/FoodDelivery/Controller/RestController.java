@@ -22,7 +22,7 @@ public class RestController {
     public List<Restaurant> getAllRest(){
         return restaurantService.getAllRestaurants();
     }
-    @GetMapping("/getRest/{id}")
+    @GetMapping("/getRestId/{id}")
     public List<MenuItem> getRestById(@PathVariable Long id){
         return restaurantService.getMenuById(id);
     }
