@@ -10,14 +10,18 @@ public class CartItem {
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     Long id;
     @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+    @ManyToOne
     @JoinColumn(name="menu_item_id")
     MenuItem menuItem;
     int qty;
     public CartItem(){
 
     }
-    public CartItem(MenuItem item,int qty){
+    public CartItem(MenuItem item,int qty,Cart cart){
         this.menuItem=item;
         this.qty=qty;
+        this.cart=cart;
     }
 }

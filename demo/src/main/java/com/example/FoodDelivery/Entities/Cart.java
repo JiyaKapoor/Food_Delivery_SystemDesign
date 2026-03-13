@@ -9,14 +9,14 @@ import java.util.*;
 public class Cart {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    Long id;
     @ManyToOne
     @JoinColumn(name="rest_id")
     Restaurant restaurant;
     @ManyToOne
     @JoinColumn(name="cust_id")
     Customer customer;
-    @OneToMany
-    @JoinColumn(name="cart_item_id")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     List<CartItem> cartItems=new ArrayList<>();
     public Cart(){
 
@@ -26,7 +26,7 @@ public class Cart {
         this.customer=customer;        
     }
     public void addItemToCart(MenuItem item,int qty){
-        CartItem cartItem=new CartItem(item,qty);
+        CartItem cartItem=new CartItem(item,qty,this);
         cartItems.add(cartItem);
     }
     public double computePrice(){

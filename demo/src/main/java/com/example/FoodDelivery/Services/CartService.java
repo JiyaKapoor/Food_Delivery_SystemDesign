@@ -25,7 +25,6 @@ public class CartService {
             Cart cart=new Cart(item.getRestaurant(),cust);
             cart.addItemToCart(item,qty);
             cartRepo.save(cart);
-
         }
         else{
             Cart existingCart=cartRepo.findByCustomerAndRestaurant(cust,item.getRestaurant()).orElseThrow(() -> new RuntimeException("Cart not found"));

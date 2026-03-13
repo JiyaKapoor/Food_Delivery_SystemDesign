@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.awt.*;
 
 @Entity
-@Table(name="menuItems")
+@Table(name="menu_items")
 public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +30,8 @@ public class MenuItem {
     }
     public Restaurant getRestaurant(){
         return this.rest;
+    }
+    public void setRestaurant(Restaurant rest){
+        this.rest=rest;
     }
 }

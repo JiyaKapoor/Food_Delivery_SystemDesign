@@ -22,7 +22,9 @@ public class Restaurant {
         this.name = name;
         this.loc = loc;
     }
-
+    public String getName(){
+        return this.name;
+    }
     public List<MenuItem> getMenu() {
         return this.menu;
     }
