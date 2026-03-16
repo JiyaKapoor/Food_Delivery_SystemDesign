@@ -9,6 +9,4 @@ public class OrderReq {
     public Long getRestId(){
         return this.restId;
     }
-
-
 }

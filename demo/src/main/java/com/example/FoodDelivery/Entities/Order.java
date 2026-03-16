@@ -13,12 +13,15 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="restId")
     Restaurant rest;
+    @Enumerated(EnumType.STRING)
     OrderStatus orderstatus = OrderStatus.PREPARING;
     @OneToOne
     @JoinColumn(name="agentId")
     DeliveryAgent agent;
     double price;
+    public Order(){
 
+    }
     public Order(Customer cust, Restaurant rest, double price, DeliveryAgent agent) {
         this.cust = cust;
         this.rest = rest;
@@ -45,5 +48,11 @@ public class Order {
 
     public Restaurant getRest() {
         return this.rest;
+    }
+    public Long getId(){
+        return this.orderId;
+    }
+    public void setStatus(OrderStatus status){
+        this.orderstatus=status;
     }
 }
