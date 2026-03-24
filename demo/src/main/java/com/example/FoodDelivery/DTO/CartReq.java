@@ -1,5 +1,4 @@
 package com.example.FoodDelivery.DTO;
-
 public class CartReq {
     private Long custId;
     private Long itemId;
