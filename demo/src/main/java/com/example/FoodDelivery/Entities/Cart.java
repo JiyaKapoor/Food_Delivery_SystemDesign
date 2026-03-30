@@ -1,5 +1,4 @@
 package com.example.FoodDelivery.Entities;
-
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
