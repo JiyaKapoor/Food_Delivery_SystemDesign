@@ -13,7 +13,6 @@ public class CartReq {
     public void setCustId(Long custId){
         this.custId = custId;
     }
-
     public void setItemId(Long itemId){
         this.itemId = itemId;
     }
