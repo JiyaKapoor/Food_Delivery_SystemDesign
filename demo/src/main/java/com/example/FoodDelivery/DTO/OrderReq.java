@@ -1,5 +1,4 @@
 package com.example.FoodDelivery.DTO;
-
 public class OrderReq {
     private Long custId;
     private Long restId;
