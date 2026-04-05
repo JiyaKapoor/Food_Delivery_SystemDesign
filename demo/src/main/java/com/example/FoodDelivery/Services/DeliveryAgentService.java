@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 public class DeliveryAgentService {
     @Autowired
     private AgentRepo agentRepo;
-
     public void registerAgent(Location loc,boolean isAval){
         DeliveryAgent agent=new DeliveryAgent(loc,isAval);
         agentRepo.save(agent);
