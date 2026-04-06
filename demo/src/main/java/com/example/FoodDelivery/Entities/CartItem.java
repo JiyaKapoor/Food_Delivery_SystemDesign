@@ -1,6 +1,5 @@
 package com.example.FoodDelivery.Entities;
 
-
 import jakarta.persistence.*;
 
 @Entity
