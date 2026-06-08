@@ -10,6 +10,7 @@ public class CartReq {
     public int getQty(){
         return this.qty;
     }
+    
     public void setCustId(Long custId){
         this.custId = custId;
     }
