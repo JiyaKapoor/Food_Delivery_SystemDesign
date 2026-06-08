@@ -3,6 +3,7 @@ public class CartReq {
     private Long custId;
     private Long itemId;
     private int qty;
+    
     public Long getCustId(){return this.custId;}
     public Long getItemId(){
         return this.itemId;
